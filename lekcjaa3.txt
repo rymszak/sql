@@ -32,3 +32,24 @@ SELECT DISTINCT id_kopii from wypozyczenia where data_wypozyczenia between '2005
 zd8
 wyswietl czas wyporzyczenia i id kopii z wyporzyczenia gdfziene wyporzyczne jest większe od 1
 SELECT id_kopii, data_zwrotu - data_wypozyczenia as czas from wypozyczenia where data_zwrotu - data_wypozyczenia > 1; 
+---------------------------------------------------------------------------------------------------------------------------------------------------
+zd9 
+wyświetl napis 1 litera imienia . nazwisko aktorów
+SELECT Concat(LEFT(imie,1),+'. ',+nazwisko) as aktorzy FROM aktorzy; 
+ ...          substring(imie,1,1),'.'.nazwisko as ...
+zd10
+wypisz filmy z liczbą rosnącą SELECT tytul FROM filmy order by LENGTH(tytul); 
+SELECT tytul FROM filmy order by LENGTH(tytul); 
+
+zd11
+tytul i cena 3 najnowszych filmów
+SELECT tytul, cena FROM filmy ORDER by rok_produkcji DESC LIMIT 3; 
+
+zd12
+wyświetl imie 1 litere imienia i ostatnia w kolimnach imie pierwsza ostatnia
+SELECT imie, LEFT(imie,1) as 'pierwsza', RIGHT(imie,1) as 'ostatnia' FROM klienci; 
+
+zd13
+imie piersza i ostatnia litera jest taka sama nie odróznia małej od dużej
+SELECT imie FROM klienci where LEFT(imie,1) = RIGHT(imie,1); 
+SELECT DISTINCT imie FROM klienci where substring(lower(imie),1,1) = substring(lower(imie),length(imie),1); 
