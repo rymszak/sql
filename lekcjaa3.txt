@@ -53,3 +53,11 @@ zd13
 imie piersza i ostatnia litera jest taka sama nie odróznia małej od dużej
 SELECT imie FROM klienci where LEFT(imie,1) = RIGHT(imie,1); 
 SELECT DISTINCT imie FROM klienci where substring(lower(imie),1,1) = substring(lower(imie),length(imie),1); 
+
+zd14
+tytul gdzie przed ostatnia litera to 'o' 
+SELECT tytul FROM filmy where substring(tytul,-2,1)="o"; 
+
+zd15
+wypisz imie.nazwisko@zsti.pl
+SELECT concat(lower(imie),'.',lower(nazwisko),'@zsti.pl') as email FROM klienci; 
