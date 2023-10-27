@@ -17,3 +17,27 @@ select wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu, klienci.nazwisk
 zd 20 
 tytul i nazwisko osoby która wyporzyczyła
 select klienci.nazwisko, filmy.tytul from wypozyczenia join klienci on klienci.id_klienta=wypozyczenia.id_klienta join kopie on kopie.id_kopii=wypozyczenia.id_kopii join filmy on filmy.id_filmu=kopie.id_filmu; 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+zd 21
+tytul i rok produkcji dla Kowalski + zamiana tytul na t i rok produkcji na r.p z aliasów
+SELECT f.tytul as "t", f.rok_produkcji as "r.p" from filmy f join kopie k on f.id_filmu=k.id_filmu join wypozyczenia w on w.id_kopii=k.id_kopii join klienci kl on kl.id_klienta=w.id_klienta where kl.nazwisko like "Kowalski"; 
+
+zd 22
+pierwsze wyporzyczenie
+SELECT klienci.nazwisko from klienci join wypozyczenia on klienci.id_klienta=wypozyczenia.id_klienta order by wypozyczenia.data_wypozyczenia asc limit 1; 
+
+zd23
+nazwiska grających w terminator
+SELECT aktorzy.nazwisko from aktorzy join obsada on aktorzy.id_aktora=obsada.id_aktora join filmy on filmy.id_filmu=obsada.id_filmu where filmy.tytul like "Terminator"; 
+
+zd24
+filmy z de niro
+SELECT filmy.tytul from filmy join obsada on filmy.id_filmu=obsada.id_filmu join aktorzy on aktorzy.id_aktora=obsada.id_aktora where aktorzy.nazwisko like "De Niro"; 
+
+zd25
+najdłużej wyporzyczony tytuł
+SELECT filmy.tytul from filmy join kopie on kopie.id_filmu=filmy.id_filmu JOIN wypozyczenia on kopie.id_kopii=wypozyczenia.id_kopii order by wypozyczenia.data_zwrotu-wypozyczenia.data_wypozyczenia desc limit 1; 
+
+zd26
+nazwiska klientów co wyporzyczyli między daną datą
+SELECT DISTINCT klienci.nazwisko from klienci join wypozyczenia on wypozyczenia.id_klienta=klienci.id_klienta where wypozyczenia.data_wypozyczenia BETWEEN "2005-07-15" and "2005-07-20"; 
