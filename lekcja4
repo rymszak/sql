@@ -1,0 +1,19 @@
+zd 16 
+id kopii i tytul dla tych samych id filmu z orderem koppii
+select kopie.id_kopii, filmy.tytul from filmy join kopie on kopie.id_filmu=filmy.id_filmu order by kopie.id_kopii asc; 
+
+zd 17 
+tytuły dostępnych kopii
+select DISTINCT filmy.tytul from kopie inner join filmy on kopie.id_filmu=filmy.id_filmu WHERE kopie.czy_dostepna='T' order by tytul; 
+
+zd 18 
+id kopii filmów wyprodukowanych w 1984
+select kopie.id_kopii from kopie inner join filmy on kopie.id_filmu=filmy.id_filmu WHERE filmy.rok_produkcji=1984; 
+
+zd 19
+data wyporzyczenia zwrotu i nazwisko
+select wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu, klienci.nazwisko from wypozyczenia inner join klienci on klienci.id_klienta=wypozyczenia.id_klienta; 
+
+zd 20 
+tytul i nazwisko osoby która wyporzyczyła
+select klienci.nazwisko, filmy.tytul from wypozyczenia join klienci on klienci.id_klienta=wypozyczenia.id_klienta join kopie on kopie.id_kopii=wypozyczenia.id_kopii join filmy on filmy.id_filmu=kopie.id_filmu; 
