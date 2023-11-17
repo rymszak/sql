@@ -5,3 +5,7 @@
 4. select description from film_text where film_id <4;
 5. SELECT email FROM `staff`;
 6. SELECT actor.first_name, film.title from actor join film_actor on actor.actor_id = film_actor.actor_id join film on film.film_id = film_actor.film_id where film.film_id=1;
+7. SELECT film.title from film join film_category on film.film_id = film_category.film_id join category on film_category.category_id = category.category_id where name like "games";
+8. SELECT actor.first_name, actor.last_name from actor join film_actor on film_actor.actor_id = actor.actor_id join film_category on film_category.film_id = film_actor.film_id join category on category.category_id=film_category.category_id where category.name like "Horror" order by actor.actor_id DESC limit 2;
+9. SELECT staff.first_name , staff.last_name, rental.rental_date from staff join rental on rental.staff_id=staff.staff_id join inventory on inventory.inventory_id=rental.inventory_id join film on film.film_id=inventory.film_id where film.title like "ALADDIN CALENDAR";
+10. SELECT customer.first_name,customer.last_name, address.address, customer.email, country.country FROM `country` join city on city.country_id=country.country_id join address on address.city_id=city.city_id join customer on customer.address_id=address.address_id where country.country like "China";
