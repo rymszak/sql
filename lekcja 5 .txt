@@ -1,0 +1,7 @@
+5 join 5 zwykłe
+1. select first_name from actor where last_name like "Cage";
+2. select amount from payment where amount>4;
+3. select city from city where city_id BETWEEN 50 and 100;
+4. select description from film_text where film_id <4;
+5. SELECT email FROM `staff`;
+6. SELECT actor.first_name, film.title from actor join film_actor on actor.actor_id = film_actor.actor_id join film on film.film_id = film_actor.film_id where film.film_id=1;
