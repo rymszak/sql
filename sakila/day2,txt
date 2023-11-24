@@ -59,4 +59,5 @@ std()                                                                           
  zapytanie z funkcji agregujących i join
 SELECT sum(payment.amount) as 'łączne wydatki', round(AVG(payment.amount),2) as 'średnia wydatków zaokrąglone', customer.first_name,customer.last_name from payment join customer on customer.customer_id = payment.customer_id where customer.last_name like 'BARBEE';
 SELECT count(DISTINCT district) from address;                                                             zlicza różne dystrykty
-SELECT district,count(*) as licznik from address group by district order by licznik desc;                  grupa dystryktów sortowanych przez liczbe rekordów
+SELECT district,count(*) as licznik from address group by district order by licznik desc;                  grupa dystryktów sortowanych przez liczbe rekordów ile jest w grupie
+SELECT GROUP_CONCAT(address) from address where district='Texas';                                            sklejenie całego adresu w grupe 
