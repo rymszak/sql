@@ -61,3 +61,7 @@ SELECT sum(payment.amount) as 'łączne wydatki', round(AVG(payment.amount),2) a
 SELECT count(DISTINCT district) from address;                                                             zlicza różne dystrykty
 SELECT district,count(*) as licznik from address group by district order by licznik desc;                  grupa dystryktów sortowanych przez liczbe rekordów ile jest w grupie
 SELECT GROUP_CONCAT(address) from address where district='Texas';                                            sklejenie całego adresu w grupe 
+SELECT GROUP_CONCAT(address SEPARATOR ' ; ') from address where district='Texas';                              separuje grupe
+SELECT district, GROUP_CONCAT(address order by district SEPARATOR ' ; ') from address GROUP by district;        robi sam nw co
+
+zrobić 1 z join group by group_concat na 5 lini
