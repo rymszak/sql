@@ -38,5 +38,25 @@ SELECT dayname(now());                                                          
 SELECT dayofmonth(now()), dayofweek(now()), dayofyear(now());                                jaki jest dzień miesiąca tygodnia i roku w liczbach
 SELECT time_to_sec('00:15:00');                              900
   SELECT addtime('01:00:02','01:42:11');                                                      dodaje czas
+  SELECT subtime('01:00:02','01:42:11');                                                       odejmyje czas
+SELECT adddate(now(), INTERVAL 55 DAY);                                                         55 dni dalej
+SELECT subdate(now(), INTERVAL 55 DAY);                                                          55 dani wcześniej
 
-  
+3 zapytania 1 data i czas 1 join
+
+SELECT dayname(rental.rental_date), monthname(rental.rental_date),year(rental.rental_date) FROM rental;
+SELECT film.title as 'tytuł', dayname(rental.rental_date) as 'dzień wyporzyczenia', monthname(rental.rental_date) as 'miesiąc wyporzyczenia' FROM rental join inventory on inventory.inventory_id = rental.inventory_id join film on film.film_id = inventory.film_id where film.title like '%h%';
+SELECT film.title as 'tytuł', dayofmonth(rental.return_date), dayofweek(rental.return_date), dayofyear(rental.return_date) FROM rental join inventory on inventory.inventory_id = rental.inventory_id join film on film.film_id = inventory.film_id join customer on customer.customer_id= rental.customer_id join address on address.address_id=customer.address_id join city on city.city_id=address.city_id join country on country.country_id = city.country_id where country like 'Brazil';
+
+
+finkcje agregujące 
+
+select count(*) from payment
+select count(*), min(amount), max(amount), sum(amount),avg(amount) from payment                    ile zapłacił klient
+select count(*), count(address2) from address                                   nie zlicza null
+std()                                                                                         odchylenie standardowe
+
+ zapytanie z funkcji agregujących i join
+SELECT sum(payment.amount) as 'łączne wydatki', round(AVG(payment.amount),2) as 'średnia wydatków zaokrąglone', customer.first_name,customer.last_name from payment join customer on customer.customer_id = payment.customer_id where customer.last_name like 'BARBEE';
+SELECT count(DISTINCT district) from address;                                                             zlicza różne dystrykty
+SELECT district,count(*) as licznik from address group by district order by licznik desc;                  grupa dystryktów sortowanych przez liczbe rekordów
