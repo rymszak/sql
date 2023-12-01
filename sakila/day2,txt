@@ -96,4 +96,31 @@ SELECT title from film where title like '__a%';  gdzie tyle ile znaków tyle nie
 
 10 polecenie regu (__%) znak > jeśli liczby lub funkcji dlugość jeśli litery
 SELECT title from film where title like '__a%' and length(title)>10;
+_____________________________________________________
+| SELECT title from film where title REGEXP'^[a-e]'; |                        filmy od a-e          regex - przedział    ^ pokoleii
+-----------------------------------------------------
+SELECT title from film where title REGEXP'^..[a-e]';                        . określa miejsce +1
 
+zd11 regex z inną opcją
+SELECT title,rental_duration as 'dni od wyporzyczenia' from film where title REGEXP'^..[d-h]' and rental_duration>4;
+
+SELECT title from film where title REGEXP 'w$';                 kończy się na 'w'
+SELECT title from film where title REGEXP 'a.c';                a coś c
+
+zd12 urzyj  '$w' 'a.c' i join
+SELECT film.title as 'tytuł z a i 2 dalej c', actor.first_name as 'imie aktora kończące się na i', actor.last_name as 'nazwisko aktora kończące się na d' from film join film_actor on film_actor.film_id=film.film_id join actor on actor.actor_id=film_actor.actor_id where title REGEXP 'a.c' or actor.first_name REGEXP 'i$' and actor.last_name REGEXP 'd$';
+
+SELECT film.title from film where title REGEXP '[[:space:]]';                    łapie spacje
+SELECT film.title from film where title REGEXP '^[^a-x]';                          ^ wszystko co jest ^[^ ] wszystko co nie jest
+SELECT film.title from film where title Rlike '^[^a.x]';                          conajmniej żadna litera między a-x
+
+zd 13 rlike '^[^ ]' join 
+SELECT film.title, category.name from film join film_category on film.film_id=film_category.film_id join category on film_category.category_id=category.category_id where title Rlike '^[^a.x]';
+
+zd 14 pytanie z pytań
+SELECT film.title,film.release_year,film.rating,actor.first_name from film
+join film_actor on film.film_id=film_actor.film_id 
+join actor on actor.actor_id=film_actor.actor_id 
+where ((film.release_year BETWEEN 2000 and 2012) or film.rating in ('G'))
+or (actor.first_name REGEXP'[a-c]' and actor.last_name like '_a%') 
+ORDER BY `film`.`release_year` ASC;
