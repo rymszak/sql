@@ -81,3 +81,19 @@ SELECT title, release_year, rental_rate from film where release_year <2000 and r
 
 SELECT title,rating from film where rating in ('G','PG') order by rating;                            rateing ma P lub PG
 
+zd 8 or and warunki w jednym zapytaniu z like in
+SELECT title,release_year,rating,description from film where release_year<2000 and title like 'ACADEMY DINOSAUR' or rating in ('G') ORDER BY `film`.`release_year` ASC
+
+
+
+SELECT first_name,last_name from customer where last_name BETWEEN 'D' and 'E' order by last_name;                  brak nazwiks na E
+SELECT first_name,last_name from customer where left (last_name,1) BETWEEN 'D' and 'E' order by last_name;         zaczyna się na E w nazwiku
+
+zd 9 z beetween i Right i kilka wbudowanych
+SELECT title ,release_year from film where right(title,1) BETWEEN 'C'and'H' and release_year>2000 order by film.length desc;
+
+SELECT title from film where title like '__a%';  gdzie tyle ile znaków tyle nie potrzebnych liter ( linux ?)
+
+10 polecenie regu (__%) znak > jeśli liczby lub funkcji dlugość jeśli litery
+SELECT title from film where title like '__a%' and length(title)>10;
+
