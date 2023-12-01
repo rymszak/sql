@@ -65,3 +65,19 @@ SELECT GROUP_CONCAT(address SEPARATOR ' ; ') from address where district='Texas'
 SELECT district, GROUP_CONCAT(address order by district SEPARATOR ' ; ') from address GROUP by district;        robi sam nw co
 
 zrobić 1 z join group by group_concat na 5 lini
+
+
+next day----------------------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT title, replacement_cost from film order by replacement_cost desc, title;                                        sort wdg tytułu z malejącymi kosztami
+SELECT title, replacement_cost, rental_rate from film order by replacement_cost desc, rental_rate asc,title asc;        ma kolejność replacement title rental 
+
+zd 6 sort  podaj definicje zależności pierwszeństwa wyników sortowania
+SELECT title, release_year, rental_rate from film order by release_year desc, title, rental_rate desc;        pierwszeństwo te co zaczyna się po order by wydanie malejące > tytuł > wynajem malejąco
+
+zd 7 wieolokrotne warónki złożone  (or and) wiele warunkówo jednym zapytaniu z nawiasami co ma pierwszeństow or and 
+SELECT title, replacement_cost, rental_rate from film where rental_rate > 0 or rental_rate<1 order by replacement_cost desc, rental_rate asc,title asc;
+SELECT title, replacement_cost, rental_rate from film where rental_rate > 0 and rental_rate<1 order by replacement_cost desc, rental_rate asc,title asc;
+SELECT title, release_year, rental_rate from film where release_year <2000 and rental_rate >2 or length(title)%2=1 order by release_year desc, title, rental_rate desc;   pierw działa or potem and
+
+SELECT title,rating from film where rating in ('G','PG') order by rating;                            rateing ma P lub PG
+
