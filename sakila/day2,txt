@@ -124,3 +124,20 @@ join actor on actor.actor_id=film_actor.actor_id
 where ((film.release_year BETWEEN 2000 and 2012) or film.rating in ('G'))
 or (actor.first_name REGEXP'[a-c]' and actor.last_name like '_a%') 
 ORDER BY `film`.`release_year` ASC;
+
+
+
+
+
+
+
+  1. wpisz select zanim coś zrobisz
+  2. przy delete dać warunek
+3.odszukać id do update 
+
+insert into actor VALUES(201,'Henry','Cavili','2023-02-22 18:56:30');                   dodaje do tabeli
+delete from actor where actor.actor_id =201;                                            usuwa z tabeli
+DESCRIBE actor;                                                                         określa typ
+            actor(first,last) values('','')                                              auto id 
+insert into actor(actor_id, first_name,last_name) VALUES(204,'PAWEŁ','NIERODKA');        JAK JEST TE SAME ID NIE DODA
+update actor set first_name = 'Bruce' where actor_id=203;                                 update
