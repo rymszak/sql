@@ -24,3 +24,26 @@ create table liczby(
 
 insert into liczby values(1, 2, 1.1, 2.2, 1.1, 2.2, 1.1, 2.2);
 SELECT a+b, c+d, e+f, g+h, a+b<3, c+d=3.30, e+f=3.3, g+h=3.3 from liczby
+
+
+------liczby----------------
+int                                                4 dłługość od -2147483...
+float 4 długość                                    
+double 8 długość
+decimal (m,d) zalis dla m i ilość miejsc 
+------teksty--------------
+char                                               wielkośść 255 automatycznie uzupełnia łańcuch do 255
+varchar                                            wielkość 255 zapisuje info o długości łańcucha znaków
+co to typ znakowy tekst
+text                                                Maksymalna długość wynosi 2.147.483.647 znaków.
+enum                                                1-65 535  wartości     tablica w polu może znaleźć się jeden jej element
+set                                                 1-64 wartości           tablica w polu może znaleźć się kilka z jej elementów
+-------obrazy------------
+tinyblob                                            do 255 b   automatycznie uzupełnia łańcuch 
+longblob                                            do 4GB
+-------daty-------------
+date np 2015-03-15                                 format rrrr-mm-dd
+datetime                                            format rrrr-mm-dd  hh:mm:ss
+timestamp                                           dodanie daty z systemu
+time                                                 format hh:mm:ss
+year                                                 format    RRRR
