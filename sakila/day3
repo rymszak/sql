@@ -47,3 +47,18 @@ datetime                                            format rrrr-mm-dd  hh:mm:ss
 timestamp                                           dodanie daty z systemu
 time                                                 format hh:mm:ss
 year                                                 format    RRRR
+
+
+
+create database magazyn;
+create table zapas(
+id serial, 
+nazwa varchar(100),
+stan enum('wysoki','sredni','niski'));
+insert into zapas (nazwa , stan) values('mleko','wysoki');
+insert into zapas (nazwa , stan) values('ser','sredni');
+insert into zapas (nazwa , stan) values('jogurt','niski');
+insert into zapas (nazwa , stan) values('kefir','wysoki');
+
+insert into zapas (nazwa , stan) values('kefir',3);                          daje 3 argument
+delete from zapas where id=6;
