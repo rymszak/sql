@@ -25,3 +25,14 @@ insert into magazyn(nazwa, dział) VALUES('7600','7');
 -- dodanie w set działa przez dodawanie 3=1+2 4=dodany jako trzeci 5=1+4 6=2+4 7=1+2+4 8 to kolejny element  itd działa na podstawie 2^x a następny 2^x+2^x+1 itd
 -- sakila podzapytanie 
 -- select customer_id, SUM(amount), avg(amount) from payment where customer_id in (SELECT customer_id from customer where first_name='MARION');
+
+show variables like '%time+zone%'
+    select now()
+create table towary(
+    id serial,
+    nazwa varchar(255),
+    przyjecie timestamp);
+insetr into  towary (nazwa) values('mleko')
+
+
+create table zlecenie( id serial, nazwa set('maliny','jagody'), cena int);
