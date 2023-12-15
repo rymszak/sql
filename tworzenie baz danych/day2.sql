@@ -36,3 +36,7 @@ insetr into  towary (nazwa) values('mleko')
 
 
 create table zlecenie( id serial, nazwa set('maliny','jagody'), cena int);
+
+create table counter( id serial, seller_name varchar(255), dzien datetime);
+
+create table manager( id serial, manager_name set('white','black'), zmiana datetime);
