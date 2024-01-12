@@ -72,3 +72,15 @@ SELECT klienci.imie, klienci.nazwisko, count(wypozyczenia.id_klienta) as "count"
   join kopie on kopie.id_kopii=wypozyczenia.id_kopii 
   join filmy on filmy.id_filmu=kopie.id_filmu 
   group by klienci.id_klienta;
+
+
+-----------------------
+
+dodawanie do bazy danych
+
+1) insert into kurs.filmy(id_filmu,tytul,rok_produkcji,cena) VALUES(11, 'Komornik',2005, 10.5);
+2) delete from kurs.filmy where filmy.rok_produkcji =2005;
+3) update filmy set filmy.cena=cena+0.5 where filmy.rok_produkcji<1980;
+4) insert into filmy (filmy.id_filmu,filmy.tytul,filmy.rok_produkcji,filmy.cena) values(11,'Nikofor',2004,9.5);
+5)
+6) update filmy set cena=5 where filmy.tytul='Taksowkarz';
