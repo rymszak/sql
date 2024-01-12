@@ -62,4 +62,13 @@ albo natural
 SELECT klienci.imie, klienci.nazwisko, count(wypozyczenia.id_klienta) as "count" FROM `klienci` natural join wypozyczenia 
   group by klienci.id_klienta order by count(wypozyczenia.id_klienta) asc;
 
-8) 
+8) SELECT aktorzy.nazwisko, count(filmy.id_filmu) FROM aktorzy join obsada on obsada.id_aktora=aktorzy.id_aktora 
+  join filmy on filmy.id_filmu=obsada.id_filmu 
+  group by aktorzy.id_aktora 
+  having count(obsada.id_filmu) >1;
+
+9)SELECT klienci.nazwisko, sum(filmy.cena) as kwota from klienci 
+  join wypozyczenia on wypozyczenia.id_klienta=klienci.id_klienta 
+  join kopie on kopie.id_kopii=wypozyczenia.id_kopii 
+  join filmy on filmy.id_filmu=kopie.id_filmu 
+  group by klienci.id_klienta;
