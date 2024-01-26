@@ -127,3 +127,65 @@ SELECT max(kurs.cena) as "cena najdroższego kursu Basi", instruktor.nazisko as 
 SELECT kursantki.imie as "imie kursantki", instruktor.nazisko as "nazwisko instruktora" FROM `kursantki` 
     join nauka on kursantki.kursantki_id=nauka.kursantki_id JOIN kurs on kurs.kurs_id=nauka.kurs_id join instruktor on instruktor.kurs_id=kurs.kurs_id 
     where kurs.kurs_id=8;
+
+
+
+ zd26 a)
+6 tabel w sql i graficznie
+----------1--------------
+create table `woda`(
+`woda_id` int AUTO_INCREMENT primary key,
+`nazwa` varchar(50) NOT null,
+`cena` decimal(10,2)
+)engine=INNODB AUTO_INCREMENT=1 default charset=utf8 COLLATE=utf8_polish_ci
+
+insert into woda(nazwa,cena) values('czisowianka',14);
+insert into woda(nazwa,cena) values('primavera',10);
+insert into woda(nazwa,cena) values('żywiec',20);
+insert into woda(nazwa,cena) values('evian',14);
+insert into woda(nazwa,cena) values('java',7);
+insert into woda(nazwa,cena) values('nałęczowianka',12);
+
+-------------------2---------------------------
+CREATE table `napoje_gazowane`( `id_napoju` int AUTO_INCREMENT 
+    primary key, `nazwa` varchar(50) not null,
+    `cena` decimal(10,2) not null
+    )engine=INNODB AUTO_INCREMENT=1 charset=utf8 COLLATE=utf8_polish_ci;
+
+insert into napoje_gazowane(nazwa,cena) values('coca-cola',70);
+insert into napoje_gazowane(nazwa,cena) values('sprite',15);
+insert into napoje_gazowane(nazwa,cena) values('pepsi',22);
+insert into napoje_gazowane(nazwa,cena) values('dr.peper',7);
+
+-----------------3------------------------------
+create table `sprzedawca`(
+`id_sprzedawcy` int AUTO_INCREMENT primary KEY,
+    `imie` varchar(50) not null,
+    `nazwisko` varchar(50) not null
+)engine=INNODB AUTO_INCREMENT=1 charset=utf8 COLLATE=utf8_polish_ci
+
+insert into sprzedawca(imie,nazwisko) values('Franek','Rozkosz');
+insert into sprzedawca(imie,nazwisko) values('Michał','Zywer');
+insert into sprzedawca(imie,nazwisko) values('Kamil','Rymsza');
+
+--------------------4----------------------
+create table `zmiana`(
+    `data` datetime,
+    `id_sprzedawcy` int,
+    FOREIGN key(id_sprzedawcy) REFERENCES sprzedawca(id_sprzedawcy)
+    )engine=INNODB charset=utf8 COLLATE=utf8_polish_ci
+
+insert into zmiana(`data`,id_sprzedawcy) values('2024-01-04 07:00:20',2);
+insert into zmiana(`data`,id_sprzedawcy) values('2024-01-04 08:15:00',1);
+insert into zmiana(`data`,id_sprzedawcy) values('2024-01-05 12:00:00',3);
+insert into zmiana(`data`,id_sprzedawcy) values('2024-01-06 07:00:00',1);
+insert into zmiana(`data`,id_sprzedawcy) values('2024-01-01 06:30:50',2);
+insert into zmiana(`data`,id_sprzedawcy) values('2024-01-13 22:10:42',3);
+
+----------------5-----------------------------
+
+create table `polki`(
+`id_napoju` int,
+`id_wody` int,
+`id_sprzedawcy` int
+)engine=INNODB charset=utf8 COLLATE=utf8_polish_ci
