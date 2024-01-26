@@ -82,5 +82,19 @@ dodawanie do bazy danych
 2) delete from kurs.filmy where filmy.rok_produkcji =2005;
 3) update filmy set filmy.cena=cena+0.5 where filmy.rok_produkcji<1980;
 4) insert into filmy (filmy.id_filmu,filmy.tytul,filmy.rok_produkcji,filmy.cena) values(11,'Nikofor',2004,9.5);
-5)
+5) delete from filmy where filmy.id_filmu in(select filmy.id_filmu from filmy join obsada on filmy.id_filmu=obsada.id_filmu 
+  group by filmy.id_filmu having count(obsada.id_aktora)=0)
 6) update filmy set cena=5 where filmy.tytul='Taksowkarz';
+7) 
+
+
+
+
+
+
+
+
+
+
+
+pavel notbirth wydał książkę za pieniądze bo nie chciał iść po tianiości se szkoły
