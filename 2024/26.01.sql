@@ -134,7 +134,7 @@ SELECT kursantki.imie as "imie kursantki", instruktor.nazisko as "nazwisko instr
 6 tabel w sql i graficznie
 ----------1--------------
 create table `woda`(
-`woda_id` int AUTO_INCREMENT primary key,
+`id_wody` int AUTO_INCREMENT primary key,
 `nazwa` varchar(50) NOT null,
 `cena` decimal(10,2)
 )engine=INNODB AUTO_INCREMENT=1 default charset=utf8 COLLATE=utf8_polish_ci
@@ -187,5 +187,37 @@ insert into zmiana(`data`,id_sprzedawcy) values('2024-01-13 22:10:42',3);
 create table `polki`(
 `id_napoju` int,
 `id_wody` int,
+`nr_polki` int
+)engine=INNODB charset=utf8 COLLATE=utf8_polish_ci
+
+insert into polki(id_napoju,id_wody,nr_polki) values(4,6,2);
+insert into polki(id_napoju,id_wody,nr_polki) values(2,3,5);
+insert into polki(id_napoju,id_wody,nr_polki) values(1,1,3);
+
+------------------6--------------------------------
+
+create table `kasa`(
+`id_napoju` int,
+`id_wody` int,
+`nr_polki` int
 `id_sprzedawcy` int
 )engine=INNODB charset=utf8 COLLATE=utf8_polish_ci
+
+insert into kasa(id_napoju,id_wody,nr_polki,id_sprzedawcy) values(4,6,2,1);
+insert into kasa(id_napoju,nr_polki,id_sprzedawcy) values(1,5,2);
+insert into kasa(id_wody,nr_polki,id_sprzedawcy) values(2,3,3);
+
+--------------------------zapytania---------------
+
+1)kto pracował 04-01-2024
+SELECT DISTINCT s.imie, s.nazwisko FROM sprzedawca s JOIN zmiana z ON s.id_sprzedawcy = z.id_sprzedawcy WHERE DATE(z.data) = '2024-01-04';
+2)ilość zmian
+SELECT s.imie, s.nazwisko, COUNT(z.id_sprzedawcy) AS total_shifts FROM sprzedawca s LEFT JOIN zmiana z ON s.id_sprzedawcy = z.id_sprzedawcy GROUP BY s.id_sprzedawcy;
+3)woda i napoj na półce 2
+SELECT n.nazwa AS napoj, w.nazwa AS woda FROM polki p LEFT JOIN napoje_gazowane n ON p.id_napoju = n.id_napoju LEFT JOIN woda w ON p.id_wody = w.id_wody WHERE p.nr_polki = 2
+4)najwięcej zmian
+SELECT s.imie, s.nazwisko, COUNT(z.id_sprzedawcy) AS total_shifts FROM sprzedawca s LEFT JOIN zmiana z ON s.id_sprzedawcy = z.id_sprzedawcy GROUP BY s.id_sprzedawcy ORDER BY total_shifts DESC LIMIT 1;
+5)ilość zarobku w danym dniu
+SELECT s.imie, s.nazwisko, SUM(k.cena) AS total_revenue FROM sprzedawca s JOIN zmiana z ON s.id_sprzedawcy = z.id_sprzedawcy JOIN kasa k ON z.id_sprzedawcy = k.id_sprzedawcy WHERE DATE(z.data) = '2024-01-04' GROUP BY s.id_sprzedawcy;
+6)napoje których cena jest poniżej średniej
+SELECT 'napoje_gazowane' AS typ, nazwa, cena FROM napoje_gazowane WHERE cena < (SELECT AVG(cena) FROM (SELECT cena FROM napoje_gazowane UNION SELECT cena FROM woda) AS all_products) UNION SELECT 'woda' AS typ, nazwa, cena FROM woda WHERE cena < (SELECT AVG(cena) FROM (SELECT cena FROM napoje_gazowane UNION SELECT cena FROM woda) AS all_products);
