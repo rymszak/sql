@@ -69,3 +69,6 @@ create table sprzedaz(
     cena int DEFAULT 30,
     kursantki_id int,
     blokada int DEFAULT 1)
+
+create TRIGGER nowasprzedaz after insert on sprzedaz for 
+	EACH row update kursantki set ostatni_zakup_id = new.kursantki_id
