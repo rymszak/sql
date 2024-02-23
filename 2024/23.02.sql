@@ -39,7 +39,7 @@ FROM actor;
 
 
 ---------------------------magazyn-----------------------
-			 tranzakcje-automatyczne zmienianie
+			 tranzakcje-automatyczne zmienianie wielu na raz
 
 start TRANSACTION;
 insert into sprzedaz(id_towaru, sztuk, cena) values(1,3,30);
@@ -54,3 +54,18 @@ INSERT into actor(first_name,last_name) values('Al', 'Pacino');
 insert into `language`(name,language_id) values('Polish',7);
 insert into film (title,original_language_id, release_year, language_id) values('Jocker',1, '2019',7); 
 COMMIT;
+
+
+
+------------------------trigger-------------------------
+
+kursantki
+alter table kursantki add ostatni_zakup_id int;
+
+create table sprzedaz(
+    id serial,
+    id_towaru int,
+    sztuk int default 30,
+    cena int DEFAULT 30,
+    kursantki_id int,
+    blokada int DEFAULT 1)
