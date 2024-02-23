@@ -72,3 +72,8 @@ create table sprzedaz(
 
 create TRIGGER nowasprzedaz after insert on sprzedaz for 
 	EACH row update kursantki set ostatni_zakup_id = new.kursantki_id
+
+insert into sprzedaz (id_towaru, sztuk,cena,kursantki_id) values(1,11,123,1);
+SELECT * from kursantki;
+SELECT * from sprzedaz
+insert into sprzedaz (id_towaru, sztuk,cena,kursantki_id) values(2,22,443,2);
