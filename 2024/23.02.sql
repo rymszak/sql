@@ -36,3 +36,21 @@ SELECT first_name,
       'NOT CHASE'),
     'NOT ED') 
 FROM actor;
+
+
+---------------------------magazyn-----------------------
+			 tranzakcje-automatyczne zmienianie
+
+start TRANSACTION;
+insert into sprzedaz(id_towaru, sztuk, cena) values(1,3,30);
+update towary set stan=stan-3 where id=1;
+COMMIT;
+rollback zamiast commit usuwa tranzakcje
+
+28 3 tranzakcje w sakili
+
+	start TRANSACTION;
+INSERT into actor(first_name,last_name) values('Al', 'Pacino');
+insert into `language`(name,language_id) values('Polish',7);
+insert into film (title,original_language_id, release_year, language_id) values('Jocker',1, '2019',7); 
+COMMIT;
