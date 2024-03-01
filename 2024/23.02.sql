@@ -93,3 +93,14 @@ DELIMITER ;
 
 -- delimiter - separator zaczyna się od deli..$$
 -- sqlstate- wyświetla błąd
+
+start TRANSACTION;
+update sprzedaz set cena = 300 where id=2;
+commit;
+
+INSERT into sprzedaz (id_towaru,sztuk,cena,kursantki_id,blokada) values (1,10,100,2,0);
+
+start TRANSACTION;
+update sprzedaz set cena = 300 where id=4;
+commit;
+--teraz sie zmieniło
