@@ -80,3 +80,13 @@ SELECT * from sprzedaz
 insert into sprzedaz (id_towaru, sztuk,cena,kursantki_id) values(2,22,443,2);
 
 alter table sprzedaz add blokada int default 1
+
+DELIMITER $$
+create TRIGGER aktualizacjasprzedazy before update on sprzedaz 
+for each row 
+	begin 
+		if(SELECT blokada from sprzedaz where id=NEW.id)>0 then 
+        signal sqlstate '45000' set MESSAGE_TEXT = 'Blad: nie mozna zaktualizowac rekordu';
+        end if;
+    end $$
+DELIMITER ;
