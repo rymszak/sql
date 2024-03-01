@@ -135,3 +135,30 @@ DELIMITER $$
 DELIMITER ;
 
 insert into sprzedaz (id_towaru, sztuk, cena, kursantki_id, blokada) VALUES(1,555,1010,5,0);
+
+create table memo( 
+	memo_id serial,
+	tytul varchar(255),
+	wpis varchar(255),
+	termin date,
+	dodanie time);
+insert into memo (memo_id,tytul,wpis,termin,dodanie) values(1,'urodziny babci','kupic kwiaty oraz torcik wedlowski','2023-03-09',"13:57:00")
+insert into memo (memo_id,tytul,wpis,termin,dodanie) values(3,'rozmowa z szefem','przygotowac plan sprzedaży','2023-03-09',"13:47:00");
+alter table memo add COLUMN zdarzenie int default 0
+create table sukcesy(
+	sukcesy_id serial,
+    wydarzenie varchar(255),
+    czas timestamp
+)
+
+
+DELIMITER $$
+    create trigger addsuccess after update on memo
+    for each row 
+    begin
+        if new.zdarzenie>0 THEN
+        INSERT INTO sukcesy (wydarzenie, czas)
+        VALUES (NEW.tytul, NOW());
+end IF;
+    end $$
+DELIMITER ;
