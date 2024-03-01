@@ -68,7 +68,8 @@ create table sprzedaz(
     sztuk int default 30,
     cena int DEFAULT 30,
     kursantki_id int,
-    blokada int DEFAULT 1)
+--    blokada int DEFAULT 1
+	)
 
 create TRIGGER nowasprzedaz after insert on sprzedaz for 
 	EACH row update kursantki set ostatni_zakup_id = new.kursantki_id
@@ -77,3 +78,5 @@ insert into sprzedaz (id_towaru, sztuk,cena,kursantki_id) values(1,11,123,1);
 SELECT * from kursantki;
 SELECT * from sprzedaz
 insert into sprzedaz (id_towaru, sztuk,cena,kursantki_id) values(2,22,443,2);
+
+alter table sprzedaz add blokada int default 1
