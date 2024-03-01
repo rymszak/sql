@@ -90,3 +90,6 @@ for each row
         end if;
     end $$
 DELIMITER ;
+
+-- delimiter - separator zaczyna się od deli..$$
+-- sqlstate- wyświetla błąd
