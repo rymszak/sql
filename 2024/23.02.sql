@@ -125,10 +125,13 @@ DELIMITER $$
 -- triger który po dodaniu inserta w polu wydarzenia da insert, uzytkownik wypisze trigger, tablica sprzedaz a id będzie stworzone nowe 
 
 DELIMITER $$
-	create trigger nowaSprzedaz after insert on sprzedaz 
- 	for EACH row 
- 		begin 
- 			update kursantki set ostatni_zakup_id=new.id where kursantki_id=new.kursantki.id;
-   	 		insert into zdarzenia(wydarzenia,urzytkownik, tablica,recor_id) values('insert', 'trigger','sprzedaz',new.id);
- 		end $$
+    create trigger nowaSprzedaz after insert on sprzedaz 
+    for each row 
+    begin
+        update kursantki set ostatni_zakup_id =new.id where kursantki_id=new.kursantki_id;
+        insert into zdarzenia(wydarzenia,uzytkownik,tablica,recor_id)
+        	VALUES('insert','trigger','sprzedaz',NEW.id);
+    end $$
 DELIMITER ;
+
+insert into sprzedaz (id_towaru, sztuk, cena, kursantki_id, blokada) VALUES(1,555,1010,5,0);
