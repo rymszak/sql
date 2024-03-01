@@ -104,3 +104,31 @@ start TRANSACTION;
 update sprzedaz set cena = 300 where id=4;
 commit;
 --teraz sie zmieniło
+
+-------------
+create table zdarzenia(
+    id_zdarzenia serial,
+	czas timestamp,
+    wydarzenia varchar(255),
+    uzytkownik varchar(255),
+    tablica varchar(255),
+    recor_id bigint
+)
+
+DELIMITER $$ 
+ CREATE TRIGGER logSprzedazy after insert on sprzedaz 
+ for EACH row
+ BEGIN
+ 	insert into zdarzenia(wydarzenia,uzytkownik,tablica,recor_id) values ('insert','trigger','sprzedaz',new.id);
+    end$$
+    DELIMITER ;
+-- triger który po dodaniu inserta w polu wydarzenia da insert, uzytkownik wypisze trigger, tablica sprzedaz a id będzie stworzone nowe 
+
+DELIMITER $$
+	create trigger nowaSprzedaz after insert on sprzedaz 
+ 	for EACH row 
+ 		begin 
+ 			update kursantki set ostatni_zakup_id=new.id where kursantki_id=new.kursantki.id;
+   	 		insert into zdarzenia(wydarzenia,urzytkownik, tablica,recor_id) values('insert', 'trigger','sprzedaz',new.id);
+ 		end $$
+DELIMITER ;
