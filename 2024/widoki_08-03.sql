@@ -19,8 +19,8 @@ SELECT
 FROM 
 	`country`
 order by PKB DESC;
-
-CREATE VIEW pozycjaPKB as
+======================================================================================================================================
+CREATE VIEW pozycjaPKB as							
   SELECT 
 	  GNP as PKB,
 	  Name as kraj, 
@@ -42,3 +42,32 @@ CREATE view miasta AS
         population as populacja
 	from city
     order by name
+
+CREATE view jezyk AS
+	SELECT 	
+        CountryCode as kodKraju,
+        `Language` as jezyk, 
+        IsOfficial as oficjalny,
+        Percentage as procent
+	from countrylanguage
+    order by `language`;
+
+
+
+@nazwa:=nl+1 ---------- zmianna     
+set @nr :=0;
+SELECT @nr := @nr+1,PKB,kraj,DlugoscZycia from pozycjapkb
+select * from jezyk where oficjalny = "F";
+
+
+sakila
+
+SELECT CONCAT(C.first_name,' ',C.last_name) as klient,
+sum(P.amount) as zaplata,
+avg(P.amount) as srednia
+from payment as P,customer as C 
+where 
+C.customer_id=P.customer_id
+group by C.customer_id
+order by zaplata desc
+
