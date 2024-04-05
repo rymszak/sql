@@ -1,2 +1,3 @@
 tworzenie usera
 create user kamil@localhost IDENTIFIED by 'kamil'
+uprawnienia na głównej i na użytkownika
