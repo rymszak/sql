@@ -1,3 +1,14 @@
-tworzenie usera
+1)tworzenie usera
 create user kamil@localhost IDENTIFIED by 'kamil'
-uprawnienia na głównej i na użytkownika
+
+2)uprawnienia na głównej i na użytkownika
+              Piszesz GRANT jeśli chcesz nadać wszystkie uprawnienia to
+              piszesz ALL PRIVILEGES ...– to oznacza że użytkownik ma wszystkie uprawnienia jakie może mieć w MySQL
+              Gdybyśmy chcieli aby ktoś tylko wyświetlał to piszemy
+             GRANT SELECT ...– wówczas użytkownik może tylko wyświetlać
+              GRANT DELETE ...– usuwanie uprawnień
+GRANT ALL PRIVILEGES ON pasy_startowe.* to kamil@localhost        * daje wszystkie tabele
+sprawdzić jakie uprawnienie daje co
+
+3)usuwanie usera
+drop user kamil@localhost;
