@@ -1,0 +1,2 @@
+tworzenie usera
+create user kamil@localhost IDENTIFIED by 'kamil'
