@@ -117,3 +117,101 @@ mysqli_close($conn);
 </form>
 </body>
 </html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- <?php
+$conn=mysqli_connect('localhost','root','','warsztat') or die('Błąd');
+mysqli_set_charset($conn,"utf8");
+$query="SELECT odloty.id, odloty.miasto, odloty.czas FROM odloty;";
+$result=mysqli_query($conn, $query);
+?> -->
+
+
+<?php
+if(isset($_POST['imie'])&& isset($_POST['nazwisko'])&& isset($_POST['miastoz']))
+{
+    $conn=mysqli_connect('localhost','root','','warsztat') or die ("błąd");
+    mysqli_set_charset($conn,"utf8");
+    $imie=$_POST['imie'];
+    $nazwisko=$_POST['nazwisko'];
+    $miastoz=$_POST['miastoz'];
+    $garaz=$_POST['garaz'];
+    // $query="SELECT odloty.id, odloty.miasto,odloty.czas FROM odloty";
+    $query2="INSERT klienci VALUES('','$imie','$nazwisko','$miastoz',now(),'$garaz')";
+
+    $result=mysqli_query($conn,$query2);
+    echo $imie." ".$nazwisko." został dodany";
+}
+else{
+    echo 'wprowadz poprawne dane';
+}
+mysqli_close($conn);
+?>
+<br>
+<a href="index.php"> Wróć do menu </a>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php
+// $conn=mysqli_connect('localhost','root','','porty_lotnicze') or die ("błąd");
+// mysqli_set_charset($conn,"utf8");
+// $query = "SELECT odloty.miasto FROM odloty;";
+// $result=mysqli_query($conn,$query);
+// $query2="SELECT odloty.miasto FROM odloty;";
+// $result2=mysqli_query($conn,$query2);
+// echo "podróżujemy do ";
+// echo'<ul>';
+// while($row=mysqli_fetch_row($result))
+// {
+//     echo '<li>'.$row[0].'</li>';
+// }
+// echo '</ul>';
+// mysqli_close($conn);
+// ?>
+<form action="rezerwacja.php" method="post">
+Imie: <input type="text" name='imie'><br>
+Nazwisko: <input type="text" name='nazwisko'><br>
+miasto zamieszkania: <input type="text" name='miastoz'><br>
+<?php
+$conn=mysqli_connect('localhost','root','','warsztat') or die('Błąd');
+mysqli_set_charset($conn,"utf8");
+$query="SELECT miejsce.numer_garazu FROM `miejsce`;";
+$result=mysqli_query($conn, $query);
+echo '<select name="garaz">';
+while($row=mysqli_fetch_row($result)){
+    echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+}
+echo '</select>';
+mysqli_close($conn);
+?>
+<input type="reset" value="reset">
+<input type="submit" value="send">
+
+</form>
+</body>
+</html>
